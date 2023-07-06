@@ -7,7 +7,6 @@ import datetime
 
 def give_time():
     now = datetime.datetime.now()
-    print ("Current date and time : ")
     return (now.strftime("%Y-%m-%d %H:%M:%S"))
 
 load_dotenv()
@@ -34,7 +33,7 @@ if __name__ == "__main__":
                 f.seek(0)  # Move the file pointer to the beginning
                 data = f.read()
                 f.write(f"\ntweet sent, {give_time()}")
-            time.sleep(1800)
+            time.sleep(60)
         except Exception as e:
             with open("logs.txt", "a+", encoding='utf-8') as f:
                 f.seek(0)  # Move the file pointer to the beginning

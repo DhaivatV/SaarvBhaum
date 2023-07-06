@@ -24,8 +24,13 @@ if __name__ == "__main__":
         tweet = generate_tweet()
         try:
             create_tweet(tweet)
-            print("tweet created")
+            with open("logs.txt", "w+", encoding='utf-8') as f:
+                f.write("tweet sent")
+                f.close()
             time.sleep(1800)
         except Exception as e:
+            with open("logs.txt", "w+", encoding='utf-8') as f:
+                f.write(str(e))
+                f.close()
             print("Error, trying again")
 

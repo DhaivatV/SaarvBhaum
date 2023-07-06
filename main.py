@@ -38,20 +38,24 @@ def generate_answer(topn_chunks):
     for c in topn_chunks:
         prompt += c + '\n\n'
 
-    prompt += "Instructions: Unveil the hidden layers of wisdom within the provided book data and create one captivating tweets with proper hashtags that will capture the attention of millions."\
+    prompt += "Instructions: Unveil the hidden layers of wisdom within the provided book data and create one captivating tweets within a word limit of 240 characters with proper hashtags that will capture the attention of millions and make sure not to give answer as  .Don't write as 'tweet:' or 'Tweet'.Dont mention name J. Sai Deepak in the tweet"\
               "Craft thought-provoking messages, intriguing quotes, or fascinating facts derived from the data to ignite discussions and engage a wide audience on social media."\
               "Unleash your creativity and transform the book's knowledge into viral tweets that leave a lasting impact on readers worldwide."\
               "dont Cite each reference using [number] notation (every result has this number at the beginning)."\
               "no Citation should be done at the end of each sentence. If the search results mention multiple subjects"\
               "with the same name, create separate answers for each. Only include information found in the results and"\
-              "don't add any additional information. Make sure the answer is correct and don't output false content."\
-              "If the text does not relate to the query, simply state 'Found Nothing'. Don't write 'answer:'"\
-              "Directly start the answer.\n"
+              "don't add any additional information. Make sure the answer is correct and don't output false content.Don't write as 'tweet:' or 'Tweet'. "\
+              "If the text does not relate to the query, simply state 'Found Nothing'.'"\
+              "Directly start the answer. and stick to the character limit of 240.Don't write as 'tweet:' or 'Tweet'.Strictly give the tweet from the book data shared below.\n"
 
 
-    prompt += f"query: follow the instructions above\n\n"
+    prompt += f"query: follow the instructions above and generate respctive answers in 240 characters. Don't write as 'tweet:' or 'Tweet'\n\n"
     answer = generate_text(prompt)
-    return answer
+
+    if type(answer)==list:
+        return(answer[0])
+    else:
+        return answer
 
 def main(content_chunks_list):
 
@@ -75,4 +79,3 @@ def generate_tweet():
 
     return tweet
 
-generate_tweet()

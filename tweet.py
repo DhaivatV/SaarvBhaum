@@ -22,7 +22,10 @@ if __name__ == "__main__":
 
     while True:
         tweet = generate_tweet()
-        create_tweet(tweet)
-        print("tweet created")
-        time.sleep(1800)
+        try:
+            create_tweet(tweet)
+            print("tweet created")
+            time.sleep(1800)
+        except Exception as e:
+            print("Error, trying again")
 

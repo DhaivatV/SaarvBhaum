@@ -3,6 +3,12 @@ from dotenv import load_dotenv
 from dotenv import dotenv_values
 from main import generate_tweet
 import time
+import datetime
+
+def give_time():
+    now = datetime.datetime.now()
+    print ("Current date and time : ")
+    return (now.strftime("%Y-%m-%d %H:%M:%S"))
 
 load_dotenv()
 config = dotenv_values(".env")
@@ -24,13 +30,15 @@ if __name__ == "__main__":
         tweet = generate_tweet()
         try:
             create_tweet(tweet)
-            with open("logs.txt", "w+", encoding='utf-8') as f:
-                f.write("tweet sent")
-                f.close()
+            with open("logs.txt", "a+", encoding='utf-8') as f:
+                f.seek(0)  # Move the file pointer to the beginning
+                data = f.read()
+                f.write(f"\ntweet sent, {give_time()}")
             time.sleep(1800)
         except Exception as e:
-            with open("logs.txt", "w+", encoding='utf-8') as f:
-                f.write(str(e))
-                f.close()
+            with open("logs.txt", "a+", encoding='utf-8') as f:
+                f.seek(0)  # Move the file pointer to the beginning
+                data = f.read()
+                f.write("\n"+str(e))
             print("Error, trying again")
 
